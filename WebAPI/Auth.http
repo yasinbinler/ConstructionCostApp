@@ -1,0 +1,108 @@
+@baseUrl = https://localhost:7179
+@token = 
+
+### Rolleri Listele (Veritabanından manuel olarak kontrol edin)
+
+### 1. Admin ile Login (Seed Data)
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@constructioncost.com",
+  "password": "Admin123!"
+}
+
+### 2. Yeni Sistem Kullanıcısı Kaydet
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test Sistem Kullanıcısı",
+  "email": "sistemuser@example.com",
+  "password": "Test123!",
+  "roleId": 2
+}
+
+### 3. Yeni Müşteri Kaydet
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test Müşteri",
+  "email": "musteri@example.com",
+  "password": "Test123!",
+  "roleId": 3
+}
+
+### 4. Yeni Tedarikçi Kaydet
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Test Tedarikçi",
+  "email": "tedarikci@example.com",
+  "password": "Test123!",
+  "roleId": 4
+}
+
+### 5. Yeni Admin Kaydet
+POST {{baseUrl}}/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Yeni Admin",
+  "email": "newadmin@constructioncost.com",
+  "password": "NewAdmin123!",
+  "roleId": 1
+}
+
+### 6. Sistem Kullanıcısı ile Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "sistemuser@example.com",
+  "password": "Test123!"
+}
+
+### 7. Müşteri ile Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "musteri@example.com",
+  "password": "Test123!"
+}
+
+### 8. Tedarikçi ile Login
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "tedarikci@example.com",
+  "password": "Test123!"
+}
+
+### 9. Mevcut Kullanıcı Bilgilerini Al (Token gerekli)
+GET {{baseUrl}}/api/auth/me
+Authorization: Bearer {{token}}
+
+### 10. Admin-Only Endpoint Test (Sadece Admin erişebilir)
+GET {{baseUrl}}/api/auth/admin-only
+Authorization: Bearer {{token}}
+
+### Notlar:
+# 1. İlk login yaptıktan sonra dönen "token" değerini yukarıdaki @token değişkenine yapıştırın
+# 2. Seed data ile otomatik olarak:
+#    - Admin rolü (ID: 1)
+#    - Sistem Kullanıcısı rolü (ID: 2)
+#    - Müşteri rolü (ID: 3)
+#    - Tedarikçi rolü (ID: 4)
+#    - Admin kullanıcı (email: admin@constructioncost.com, şifre: Admin123!)
+#    oluşturulur
+# 3. Roller:
+#    RoleId: 1 = Admin
+#    RoleId: 2 = Sistem Kullanıcısı
+#    RoleId: 3 = Müşteri
+#    RoleId: 4 = Tedarikçi
+
